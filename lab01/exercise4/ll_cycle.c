@@ -2,12 +2,22 @@
 #include "ll_cycle.h"
 
 int ll_has_cycle(node *head) {
+    if(head==NULL)return 0;
     /* TODO: Implement ll_has_cycle */
-    struct node *start=head;
-    head=head->next;
-    while (head!=NULL){
-        if(head==start)return 1;
-        head=head->next;
+    struct node *fast = head;
+    struct node *slow = head;
+    head = head->next;
+    while (slow!=NULL){
+        fast=fast->next;
+        if(fast==NULL)return 0;
+        if(slow==fast)return 1;
+        fast=fast->next;
+        if(fast==NULL)return 0;
+        if(slow==fast)return 1;
+        slow=slow->next;
+
+
+        if(slow==fast)return 1;
     }
     return 0;
 }
